@@ -1,7 +1,6 @@
 # 🌟 My 42 School Journey
 
-Welcome! I’m Sorawit, a 42 School student.  
-42 School is an **innovative, peer-driven, self-paced coding school** focused on practical programming, problem solving, and real-world skills.
+Welcome! I’m sklaokli (42 intra), a 42 School student.  
 
 ---
 
