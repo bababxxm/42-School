@@ -18,22 +18,122 @@ The Piscine is an intensive introduction to programming, focusing on C fundament
 
 ---
 
-## PROJECT
-Mandatory and bonus projects after the Piscine, focusing on C, C++, Web, Networking, and Docker.
+## PROJECTS
+Mandatory and bonus projects after the Piscine, organized by Rank. Each rank may include exams.
+
+---
+
+### ⚪ Rank 00
 
 <div align="center">
 
 | Project | Description | Finished Date | Grade |
-| :------ | :--------- | :--------- | :------------ |
+| :------ | :--------- | :------------ | :---- |
 | [Libft](https://github.com/username/libft) | C library project implementing common functions | 2025-07-10 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
 | [Ft_Printf](https://github.com/username/ft_printf) | Implement printf in C, handling format strings | 2025-07-20 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
 | [Get_Next_Line](https://github.com/username/get_next_line) | Read lines from a file descriptor efficiently | 2025-07-27 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+
+</div>
+
+- **Exam Rank 00**  
+  No exam for this rank.
+
+---
+
+### 🟠 Rank 01
+
+<div align="center">
+
+| Project | Description | Finished Date | Grade |
+| :------ | :--------- | :------------ | :---- |
+| [Born2BeRoot](https://github.com/username/born2beroot) | Virtual Machine setup with Debian, solo project | 2025-08-01 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
 | [Pipex](https://github.com/username/pipex) | Implement piping between commands using fork and exec | 2025-08-05 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
 | [So_Long](https://github.com/username/so_long) | 2D game project with map parsing and graphics | 2025-08-20 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
 | [Push_Swap](https://github.com/username/push_swap) | Sort integers with limited operations | 2025-08-30 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
 
 </div>
 
+- **Exam Rank 01**  
+  No exam for this rank.
+
+---
+
+### 🔵 Rank 02
+
+<div align="center">
+
+| Project | Description | Finished Date | Grade |
+| :------ | :--------- | :------------ | :---- |
+| [Philosophers](https://github.com/username/philosophers) | Dining Philosophers problem, concurrency with threads | 2025-09-10 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+
+</div>
+
+- **Exam Rank 02**  
+  [Rank 02 Exam](https://github.com/username/exam-rank02) — C, 2–4 hours, evaluated by Moulinette
+
+---
+
+### 🟡 Rank 03
+
+<div align="center">
+
+| Project | Description | Finished Date | Grade |
+| :------ | :--------- | :------------ | :---- |
+| [Minishell](https://github.com/username/minishell) | Custom shell implementation, group project | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+
+</div>
+
+- **Exam Rank 03**  
+  [Rank 03 Exam](https://github.com/username/exam-rank03) — C, 2–4 hours, evaluated by Moulinette
+
+---
+
+### 🟢 Rank 04
+
+<div align="center">
+
+| Project | Description | Finished Date | Grade |
+| :------ | :--------- | :------------ | :---- |
+| [NetPractice](https://github.com/username/netpractice) | Networking exercises, solo project | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+| [Cub3D](https://github.com/username/cub3d) | 3D graphics project, group project | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+| [C++ Modules 00-04](https://github.com/username/cpp-modules) | C++ OOP exercises, solo projects | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+
+</div>
+
+- **Exam Rank 04**  
+  [Rank 04 Exam](https://github.com/username/exam-rank04) — 2–4 hours, evaluated by Moulinette
+
+---
+
+### 🟤 Rank 05
+
+<div align="center">
+
+| Project | Description | Finished Date | Grade |
+| :------ | :--------- | :------------ | :---- |
+| [C++ Modules 05-09](https://github.com/username/cpp-modules) | C++ OOP exercises, solo projects | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+| [Ft_IRC](https://github.com/username/ft_irc) | Chat server, group project | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+| [Inception](https://github.com/username/inception) | Docker deployment project, solo project | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+
+</div>
+
+- **Exam Rank 05**  
+  [Rank 05 Exam](https://github.com/username/exam-rank05) — 2–4 hours, evaluated by Moulinette
+
+---
+
+### ⚫ Rank 06
+
+<div align="center">
+
+| Project | Description | Finished Date | Grade |
+| :------ | :--------- | :------------ | :---- |
+| [Ft_Transcendence](https://github.com/username/ft_transcendence) | Full-stack web project (NestJS, PostgreSQL, OAuth), group | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+
+</div>
+
+- **Exam Rank 06**  
+  [Rank 06 Exam](https://github.com/username/exam-rank06) — 2–4 hours, evaluated by Moulinette
 
 ---
 
