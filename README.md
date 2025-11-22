@@ -1,17 +1,44 @@
-<p align="center">
-	<a href="#about">About</a> •
-	<a href="#piscine">Piscine</a> •
-	<a href="#project">Project</a> •
-	<a href="#exam">Exam</a>
-</p>
+# 🌟 42 School Projects Portfolio
+
+Welcome! I’m Sorawit, a 42 School student.  
+42 School is an **innovative, peer-driven, self-paced coding school** focused on practical programming, problem solving, and real-world skills.
+
+---
 
 ## ABOUT
+- Age: 21  
+- Interests: C, C++, Web Development, Systems Programming  
+- Goal: Become a full-stack developer and gain real-world experience  
+- Slack: marsoare  
+
+---
 
 ## PISCINE
+The Piscine is an intensive introduction to programming, focusing on C fundamentals.
+
+---
 
 ## PROJECT
+Mandatory and bonus projects after the Piscine, focusing on C, C++, Web, Networking, and Docker.
+
+<div align="center">
+
+| Project | Description | Finished Date | Grade |
+| :------ | :--------- | :--------- | :------------ |
+| [Libft](https://github.com/username/libft) | C library project implementing common functions | 2025-07-10 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+| [Ft_Printf](https://github.com/username/ft_printf) | Implement printf in C, handling format strings | 2025-07-20 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+| [Get_Next_Line](https://github.com/username/get_next_line) | Read lines from a file descriptor efficiently | 2025-07-27 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+| [Pipex](https://github.com/username/pipex) | Implement piping between commands using fork and exec | 2025-08-05 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+| [So_Long](https://github.com/username/so_long) | 2D game project with map parsing and graphics | 2025-08-20 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+| [Push_Swap](https://github.com/username/push_swap) | Sort integers with limited operations | 2025-08-30 | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+
+</div>
+
+
+---
 
 ## EXAM
+All exams for the Common Core, evaluated by Moulinette.
 
 <!-- <p align="center">
    <img src="https://github.com/jotavare/jotavare/blob/main/42/banners/piscine_and_common_core/github_piscine_and_common_core_banner_piscine.png">
