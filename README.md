@@ -85,7 +85,7 @@ Mandatory and bonus projects after the Piscine, organized by Rank. Each rank inc
 | Project | Description | Type | Language | Status | Grade |
 | :------ | :--------- | :--: | :------- | :----- | :---- |
 | [Philosophers](https://github.com/username/philosophers) | Dining Philosophers problem, concurrency with threads | Solo | C | Completed | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
-| [Minishell](https://github.com/username/minishell) | Custom shell implementation | Group (2) | C | Completed | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+| [Minishell](https://github.com/username/minishell) | Custom shell implementation | Group | C | Completed | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 | [Exam Rank 03](https://github.com/username/exam-rank03) | C exam, 2–4 hours | Solo | C | Completed | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 
 ---
@@ -97,7 +97,7 @@ Mandatory and bonus projects after the Piscine, organized by Rank. Each rank inc
 | Project | Description | Type | Language | Status | Grade |
 | :------ | :--------- | :--: | :------- | :----- | :---- |
 | [NetPractice](https://github.com/username/netpractice) | Networking exercises | Solo | Networking | Completed | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
-| [Cub3D](https://github.com/username/cub3d) | 3D graphics project | Group (2) | C | Completed | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+| [Cub3D](https://github.com/username/cub3d) | 3D graphics project | Group | C | Completed | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 | [C++ Modules 00-04](https://github.com/username/cpp-modules) | C++ OOP exercises | Solo | C++ | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 | [Exam Rank 04](https://github.com/username/exam-rank04) | 2–4 hours | Solo | C | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 
@@ -114,7 +114,7 @@ Mandatory and bonus projects after the Piscine, organized by Rank. Each rank inc
 | :------ | :--------- | :--: | :------- | :----- | :---- |
 | [C++ Modules 05-09](https://github.com/username/cpp-modules) | C++ OOP exercises | Solo | C++ | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 | [Inception](https://github.com/username/inception) | Docker deployment project | Solo | Docker | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
-| [Webserve](https://github.com/username/ft_irc) | Chat server | Group (2–3) | C++ | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+| [Webserve](https://github.com/username/ft_irc) | Chat server | Group | C++ | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 | [Exam Rank 05](https://github.com/username/exam-rank05) | 2–4 hours exam | Solo | C | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 
 </div>
