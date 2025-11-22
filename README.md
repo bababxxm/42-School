@@ -70,9 +70,9 @@ Mandatory and bonus projects after the Piscine, organized by Rank. Each rank inc
 
 | Project | Description | Type | Language | Status | Grade |
 | :------ | :--------- | :--: | :------- | :----- | :---- |
-| [Pipex](https://github.com/username/pipex) | Implement piping between commands using fork and exec | Solo | C | Completed | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
-| [So_Long](https://github.com/username/so_long) | 2D game project with map parsing and graphics | Solo | C | Completed | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+| [Minitalk](https://github.com/username/pipex) | Implement piping between commands using fork and exec | Solo | C | Completed | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
 | [Push_Swap](https://github.com/username/push_swap) | Sort integers with limited operations | Solo | C | Completed | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
+| [So_Long](https://github.com/username/so_long) | 2D game project with map parsing and graphics | Solo | C | Completed | <img src="https://img.shields.io/badge/125%20%2F%20100-success"/> |
 | [Exam Rank 02](https://github.com/username/exam-rank02) | C exam, 2–4 hours | Solo | C | Completed | <img src="https://img.shields.io/badge/Passed-success"/> |
 
 </div>
@@ -97,8 +97,8 @@ Mandatory and bonus projects after the Piscine, organized by Rank. Each rank inc
 | Project | Description | Type | Language | Status | Grade |
 | :------ | :--------- | :--: | :------- | :----- | :---- |
 | [NetPractice](https://github.com/username/netpractice) | Networking exercises | Solo | Networking | Completed | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
-| [Cub3D](https://github.com/username/cub3d) | 3D graphics project | Group | C | Completed | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 | [C++ Modules 00-04](https://github.com/username/cpp-modules) | C++ OOP exercises | Solo | C++ | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+| [Minirt](https://github.com/username/cub3d) | 3D graphics project | Group | C | Completed | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 | [Exam Rank 04](https://github.com/username/exam-rank04) | 2–4 hours | Solo | C | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 
 </div>
@@ -128,7 +128,7 @@ Mandatory and bonus projects after the Piscine, organized by Rank. Each rank inc
 
 | Project | Description | Type | Language | Status | Grade |
 | :------ | :--------- | :--: | :------- | :----- | :---- |
-| [Ft_Transcendence](https://github.com/username/ft_transcendence) | Full-stack web project (NestJS, PostgreSQL, OAuth) | Group (3–5) | Web | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
+| [Ft_Transcendence](https://github.com/username/ft_transcendence) | Full-stack web project (NestJS, PostgreSQL, OAuth) | Group | Web | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
 | [Exam Rank 06](https://github.com/username/exam-rank06) | 2–4 hours exam | Solo | Web | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
   
 </div>
