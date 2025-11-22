@@ -1,4 +1,4 @@
-<p align="center">
+<!-- <p align="center">
    <img src="https://github.com/jotavare/jotavare/blob/main/42/banners/piscine_and_common_core/github_piscine_and_common_core_banner_piscine.png">
 </p>
 
@@ -88,4 +88,4 @@ If you find any issues or have suggestions for improvements, feel free to fork t
 
 ## LICENSE
 
-This project is available under the MIT License. For further details, please refer to the [LICENSE](https://github.com/jotavare/42-piscine/blob/main/LICENSE) file.
+This project is available under the MIT License. For further details, please refer to the [LICENSE](https://github.com/jotavare/42-piscine/blob/main/LICENSE) file. -->
