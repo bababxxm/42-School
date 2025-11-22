@@ -4,19 +4,10 @@ Welcome! I’m sklaokli (42 intra), a 42 School student.
 
 ---
 
-## ABOUT
-- Age: 21  
-- Interests: C, C++, Web Development, Systems Programming  
-- Goal: Become a full-stack developer and gain real-world experience  
-- Slack: marsoare  
-
----
-
-## 42 ENVIRONMENT
+## 42 SCHOOL
 
 ### NORMINETTE
 At 42 School, it is expected that almost every project is written following the Norm, which is the coding standard of the school.
-
 
 ### MOULINETTE
 All projects are evaluated by **Moulinette** (automatic system) or by peers depending on the project.
@@ -31,7 +22,7 @@ The Piscine is an intensive introduction to programming, focusing on **C fundame
 
 ---
 
-## PROJECTS
+## COMMON-CORE
 Mandatory and bonus projects after the Piscine, organized by Rank. Each rank includes exams as table rows.
 
 ---
@@ -132,4 +123,9 @@ Mandatory and bonus projects after the Piscine, organized by Rank. Each rank inc
 | [Exam Rank 06](https://github.com/username/exam-rank06) | 2–4 hours exam | Solo | Web | In Progress | <img src="https://img.shields.io/badge/in%20progress-lightgrey"/> |
   
 </div>
+
+---
+
+## ADVANCED CORE
+To be continued.
 
