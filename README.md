@@ -4,18 +4,6 @@ Welcome! I’m **sklaokli**, a student at 42 School, an innovative, peer-driven,
 
 ---
 
-## 🗓️ My 42 School Timeline & Progress
-
-| Period | Stage | Key Focus | Notes |
-| :----- | :---- | :-------- | :---- |
-| 2025-06-01 → 2025-06-28 | **Piscine (C)** | Intensive C programming bootcamp, fundamentals, problem solving | 4-week intensive, daily coding |
-| 2025-07-01 → 2025-08-15 | **Common Core Ranks 00–02** | Libft, Ft_Printf, Get_Next_Line, Pipex, So_Long, Push_Swap | Solo projects, average ~1 project per week |
-| 2025-08-16 → 2025-09-30 | **Common Core Ranks 03–04** | Philosophers, Minishell, Cub3D, NetPractice, C++ Modules 00–04 | Mix of solo and group projects, ~2–3 weeks per rank |
-| 2025-10-01 → 2025-11-30 | **Common Core Ranks 05–06** | C++ Modules 05–09, Inception, Webserve, Ft_Transcendence | Advanced C++ & web projects, group collaboration emphasized |
-| 2025-12-01 → TBD | **Advanced Core** | Full-stack, networking, deployment, Docker projects | Current stage, ongoing projects, team-based |
-
----
-
 ## 🌐 Environment
 
 42 School is a **peer-driven, self-paced coding school**. Every project is evaluated within a structured environment to ensure learning, skill growth, and code quality.
