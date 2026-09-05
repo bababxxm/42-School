@@ -1,12 +1,16 @@
-## 📌 Scope
-- [ ] New Unit / Integration Test Suite
-- [ ] Test Runner / Makefile Automation
-- [ ] Documentation / Guide Updates
-- [ ] GitHub Actions CI / Workflows Update
+### 📌 Area & Scope
+* **Target Area**: `tests/` | `.github/workflows/` | `docs/` | Root Tooling <!-- delete inapplicable -->
+* **Project**: `rXX/<project_name>` <!-- if applicable -->
 
 ---
 
-## 🧪 Verification
-- [ ] Local tests executed and verified passing (`make test`)
-- [ ] Build artifacts cleaned (`make fclean-all`)
-- [ ] No regression on existing projects
+### 📝 Summary of Updates
+<!-- Describe new test cases, documentation sections, or CI automation updates -->
+
+---
+
+### 🧪 Verification Checklist
+- [ ] Local tests executed and passing (`make test`)
+- [ ] CI workflow syntax validated (valid YAML)
+- [ ] No regression on existing builds or project source files
+- [ ] Working tree cleaned (`make fclean-all`)
