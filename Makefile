@@ -180,11 +180,11 @@ fclean-all:
 
 norm norminette:
 	@if [ -n "$(DIR)" ]; then \
-		echo "$(YELLOW)Running norminette on $(DIR)...$(RESET)"; \
-		norminette $(DIR); \
+		echo "$(YELLOW)Running norminette on $(DIR) (excluding tests/)...$(RESET)"; \
+		find $(DIR) -type f \( -name "*.c" -o -name "*.h" \) | grep -v -E '(^|/)tests?/' | xargs -r norminette; \
 	else \
-		echo "$(YELLOW)Running norminette on all C projects...$(RESET)"; \
-		norminette r00/ r01/ r02/ r03/ r04/miniRT 2>/dev/null || norminette r00/; \
+		echo "$(YELLOW)Running norminette on all C projects (excluding tests/)...$(RESET)"; \
+		find r00/ r01/ r02/ r03/ r04/miniRT -type f \( -name "*.c" -o -name "*.h" \) 2>/dev/null | grep -v -E '(^|/)tests?/' | xargs -r norminette; \
 	fi
 
 test-libft:
