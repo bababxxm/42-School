@@ -1,28 +1,19 @@
-## 📌 Target Rank & Project
-- [ ] `r00/libft`
-- [ ] `r01/Born2beroot` | `r01/ft_printf` | `r01/get_next_line`
-- [ ] `r02/minitalk` | `r02/pipex` | `r02/push_swap` | `r02/so_long`
-- [ ] `r03/minishell` | `r03/philosophers`
-- [ ] `r04/cpp00-04` | `r04/miniRT` | `r04/NetPractice`
-- [ ] `r05/cpp05-09` | `r05/inception` | `r05/webserv`
-- [ ] `docs/` or `.github/` repository infrastructure
+### 📌 Target & Scope
+* **Project**: `rXX/<project_name>` <!-- e.g. r00/libft, r02/push_swap, r03/minishell -->
+* **Type**: 🚀 Feature | 🐛 Bug Fix | 🧪 Tests | 🎨 Norm Refactor | 📝 Docs | ⚙️ Tooling <!-- delete inapplicable -->
 
 ---
 
-## 🛠️ Type of Change
-- [ ] 🚀 New Feature / Logic Implementation
-- [ ] 🐛 Bug Fix
-- [ ] 🧪 Tests Added / Updated
-- [ ] 🎨 Code Style / Norminette Refactoring
-- [ ] 📝 Documentation Update
-- [ ] ⚙️ Makefile / Build Automation
+### 📝 Summary of Changes
+<!-- Provide a clear, concise summary of what was added, fixed, or modified -->
 
 ---
 
-## ✅ Quality & Norm Verification
-- [ ] `make norm` checked — 0 Norm errors, 0 Norm warnings
-- [ ] Compiles cleanly with `-Wall -Wextra -Werror`
+### ✅ Quality & Verification Checklist
+<!-- Complete all applicable verification steps before requesting review -->
+- [ ] 42 Norminette compliance verified (`make norm`)
+- [ ] Compiles cleanly with `-Wall -Wextra -Werror` (0 warnings)
 - [ ] No relink on `make` (running `make` twice does not recompile)
-- [ ] Memory leaks verified under Valgrind (0 definitely lost, 0 indirectly lost)
-- [ ] Edge cases verified (empty arguments, signals, boundary values)
-- [ ] Cleaned build artifacts before pushing (`make fclean-all`)
+- [ ] Automated / unit tests pass (`make test`)
+- [ ] Memory safety verified under Valgrind (0 definitely / indirectly lost)
+- [ ] Working directory cleaned (`make fclean-all`)
