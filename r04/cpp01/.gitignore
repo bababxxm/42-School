@@ -1,0 +1,10 @@
+.vscode
+*.o
+*.replace
+ex00/zombie
+ex01/zombieHorde
+ex02/thisIsBrain
+ex03/humanBattle
+ex04/replace
+ex05/harl
+ex06/harlFilter
