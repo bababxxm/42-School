@@ -114,23 +114,23 @@ flowchart LR
 
 ## 📚 Curriculum Project Showcase
 
-| Rank | Project | Language / Tech | Core Concepts & Engineering Learned |
-| :--- | :--- | :--- | :--- |
-| **Rank 00** | [`libft`](./r00/libft) | C | Dynamic memory allocation, string manipulation, linked list data structures, unit test harness |
-| **Rank 01** | [`Born2beroot`](./r01/Born2beroot) | Linux, Bash | Debian VM architecture, LVM partitioning, SSH hardening, UFW firewall, sudoers, cron daemon |
-| | [`ft_printf`](./r01/ft_printf) | C | Variadic functions (`va_start`, `va_arg`), format string parsing, hex conversions |
-| | [`get_next_line`](./r01/get_next_line) | C | Static variables, dynamic heap buffer management, reading from arbitrary file descriptors |
-| **Rank 02** | [`minitalk`](./r02/minitalk) | C (Unix Signals) | Inter-Process Communication (IPC) via `SIGUSR1` and `SIGUSR2`, bit-shifting transmission |
-| | [`push_swap`](./r02/push_swap) | C (Algorithms) | Stack operations (`sa`, `pb`, `rr`, `rrr`), algorithmic complexity optimization, Butterfly sort |
-| | [`so_long`](./r02/so_long) | C (MLX42 Graphics) | Window management, 2D tile rendering, event handling, flood-fill map validation |
-| **Rank 03** | [`minishell`](./r03/minishell) | C (Systems) | Lexing, AST / command parsing, pipelines, redirections (`<`, `>`, `<<`, `>>`), signal trapping, built-ins |
-| | [`philosophers`](./r03/philosophers) | C (POSIX Threads) | Concurrent programming, POSIX mutexes, race conditions, deadlock prevention, Dining Philosophers |
-| **Rank 04** | [`cpp00` – `cpp04`](./r04/) | C++98 (OOP) | Canonical Form (orthodox), memory allocation (`new`/`delete`), inheritance, subtype polymorphism, abstract classes |
-| | [`miniRT`](./r04/miniRT) | C (Graphics & Math) | Vector algebra, ray-object intersection (spheres, planes, cylinders), Phong reflection model, shadows |
-| | [`NetPractice`](./r04/NetPractice) | Networking | IPv4 addressing, subnet masks (CIDR), routing tables, switch/router configurations |
-| **Rank 05** | [`cpp05` – `cpp09`](./r05/) | C++98 (Advanced) | Exception handling, C++ casts (`static_cast`, `dynamic_cast`), templates, STL algorithms, Ford-Johnson sort |
-| | [`inception`](./r05/inception) | Docker, SysAdmin | Multi-container microservices (NGINX, WordPress, MariaDB) with Docker Compose, TLSv1.3, persistent volumes |
-| | [`webserv`](./r05/webserv) | C++98 (Networking) | Non-blocking I/O multiplexing (`poll`/`epoll`/`kqueue`), RFC 7230 HTTP/1.1 parser, CGI execution engine |
+| Rank        | Project                                | Language / Tech     | Core Concepts & Engineering Learned                                                                                |
+| :---------- | :------------------------------------- | :------------------ | :----------------------------------------------------------------------------------------------------------------- |
+| **Rank 00** | [`libft`](./r00/libft)                 | C                   | Dynamic memory allocation, string manipulation, linked list data structures, unit test harness                     |
+| **Rank 01** | [`Born2beroot`](./r01/Born2beroot)     | Linux, Bash         | Debian VM architecture, LVM partitioning, SSH hardening, UFW firewall, sudoers, cron daemon                        |
+|             | [`ft_printf`](./r01/ft_printf)         | C                   | Variadic functions (`va_start`, `va_arg`), format string parsing, hex conversions                                  |
+|             | [`get_next_line`](./r01/get_next_line) | C                   | Static variables, dynamic heap buffer management, reading from arbitrary file descriptors                          |
+| **Rank 02** | [`minitalk`](./r02/minitalk)           | C (Unix Signals)    | Inter-Process Communication (IPC) via `SIGUSR1` and `SIGUSR2`, bit-shifting transmission                           |
+|             | [`push_swap`](./r02/push_swap)         | C (Algorithms)      | Stack operations (`sa`, `pb`, `rr`, `rrr`), algorithmic complexity optimization, Butterfly sort                    |
+|             | [`so_long`](./r02/so_long)             | C (MLX42 Graphics)  | Window management, 2D tile rendering, event handling, flood-fill map validation                                    |
+| **Rank 03** | [`minishell`](./r03/minishell)         | C (Systems)         | Lexing, AST / command parsing, pipelines, redirections (`<`, `>`, `<<`, `>>`), signal trapping, built-ins          |
+|             | [`philosophers`](./r03/philosophers)   | C (POSIX Threads)   | Concurrent programming, POSIX mutexes, race conditions, deadlock prevention, Dining Philosophers                   |
+| **Rank 04** | [`cpp00` – `cpp04`](./r04/)            | C++98 (OOP)         | Canonical Form (orthodox), memory allocation (`new`/`delete`), inheritance, subtype polymorphism, abstract classes |
+|             | [`miniRT`](./r04/miniRT)               | C (Graphics & Math) | Vector algebra, ray-object intersection (spheres, planes, cylinders), Phong reflection model, shadows              |
+|             | [`NetPractice`](./r04/NetPractice)     | Networking          | IPv4 addressing, subnet masks (CIDR), routing tables, switch/router configurations                                 |
+| **Rank 05** | [`cpp05` – `cpp09`](./r05/)            | C++98 (Advanced)    | Exception handling, C++ casts (`static_cast`, `dynamic_cast`), templates, STL algorithms, Ford-Johnson sort        |
+|             | [`inception`](./r05/inception)         | Docker, SysAdmin    | Multi-container microservices (NGINX, WordPress, MariaDB) with Docker Compose, TLSv1.3, persistent volumes         |
+|             | [`webserv`](./r05/webserv)             | C++98 (Networking)  | Non-blocking I/O multiplexing (`poll`/`epoll`/`kqueue`), RFC 7230 HTTP/1.1 parser, CGI execution engine            |
 
 ---
 
@@ -192,7 +192,9 @@ Workspace Maintenance & Testing:
 ### ⚡ Quick Usage Examples
 
 #### 1. Zero-Leak Memory Safety Verification
+
 Audit dynamic memory allocation and ensure 0 leaks before an evaluation:
+
 ```bash
 # Compile and test with AddressSanitizer (detects out-of-bounds, heap overflow, use-after-free)
 make sanitize PROJECT=libft
@@ -202,21 +204,28 @@ make valgrind PROJECT=libft
 ```
 
 #### 2. Automated 42 Intra Submission (`make submit`)
+
 Deploy any project directly to your 42 Vogsphere evaluation repository without manual git subtree hassle:
+
 ```bash
 make submit PROJECT=push_swap REMOTE=git@vogsphere.42bangkok.com:vogsphere/intra-uuid-...
 ```
+
 > **Pre-flight Quality Gate:** The pipeline automatically verifies 0 Norminette errors, runs automated tests, runs `fclean`, and performs a clean `git subtree push`.
 
 #### 3. Installing Local Git Hooks
+
 ```bash
 make setup-hooks
 ```
+
 Activates:
+
 - **`pre-commit`**: Blocks accidental commits of compiled `.o`/binary objects and auto-runs Norminette on staged `.c`/`.h` files.
 - **`commit-msg`**: Enforces industry-standard [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `test:`, `refactor:`, etc.).
 
 #### 4. Compiling Individual Projects
+
 ```bash
 # C Project
 cd r02/so_long && make
