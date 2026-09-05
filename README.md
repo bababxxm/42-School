@@ -115,24 +115,24 @@ flowchart LR
 
 ## 📚 Curriculum Project Showcase
 
-| Rank | Project | Language / Tech | Core Concepts & Engineering Learned | Status |
-| :--- | :--- | :--- | :--- | :--- |
-| **Rank 00** | [`libft`](./r00/libft) | C | Dynamic memory allocation, string manipulation, linked list data structures, unit test harness | Complete |
-| **Rank 01** | [`Born2beroot`](./r01/Born2beroot) | Linux, Bash | Debian VM architecture, LVM partitioning, SSH hardening, UFW firewall, sudoers, cron daemon | Complete |
-| | [`ft_printf`](./r01/ft_printf) | C | Variadic functions (`va_start`, `va_arg`), format string parsing, hex conversions | Complete |
-| | [`get_next_line`](./r01/get_next_line) | C | Static variables, dynamic heap buffer management, reading from arbitrary file descriptors | Complete |
-| **Rank 02** | [`minitalk`](./r02/minitalk) | C (Unix Signals) | Inter-Process Communication (IPC) via `SIGUSR1` and `SIGUSR2`, bit-shifting transmission | Complete |
-| | [`pipex`](./r02/pipex) | C (Unix Processes) | `fork()`, `execve()`, `pipe()`, `dup2()`, standard I/O redirection, environment path resolution | Complete |
-| | [`push_swap`](./r02/push_swap) | C (Algorithms) | Stack operations (`sa`, `pb`, `rr`, `rrr`), algorithmic complexity optimization, Butterfly sort | Complete |
-| | [`so_long`](./r02/so_long) | C (MLX42 Graphics) | Window management, 2D tile rendering, event handling, flood-fill map validation | Complete |
-| **Rank 03** | [`minishell`](./r03/minishell) | C (Systems) | Lexing, AST / command parsing, pipelines, redirections (`<`, `>`, `<<`, `>>`), signal trapping, built-ins | Complete |
-| | [`philosophers`](./r03/philosophers) | C (POSIX Threads) | Concurrent programming, POSIX mutexes, race conditions, deadlock prevention, Dining Philosophers | Complete |
-| **Rank 04** | [`cpp00` – `cpp04`](./r04/) | C++98 (OOP) | Canonical Form (orthodox), memory allocation (`new`/`delete`), inheritance, subtype polymorphism, abstract classes | Complete |
-| | [`miniRT`](./r04/miniRT) | C (Graphics & Math) | Vector algebra, ray-object intersection (spheres, planes, cylinders), Phong reflection model, shadows | Complete |
-| | [`NetPractice`](./r04/NetPractice) | Networking | IPv4 addressing, subnet masks (CIDR), routing tables, switch/router configurations | Complete |
-| **Rank 05** | [`cpp05` – `cpp09`](./r05/) | C++98 (Advanced) | Exception handling, C++ casts (`static_cast`, `dynamic_cast`), templates, STL algorithms, Ford-Johnson sort | Complete |
-| | [`inception`](./r05/inception) | Docker, SysAdmin | Multi-container microservices (NGINX, WordPress, MariaDB) with Docker Compose, TLSv1.3, persistent volumes | Complete |
-| | [`webserv`](./r05/webserv) | C++98 (Networking) | Non-blocking I/O multiplexing (`poll`/`epoll`/`kqueue`), RFC 7230 HTTP/1.1 parser, CGI execution engine | In Progress |
+| Rank | Project | Language / Tech | Core Concepts & Engineering Learned |
+| :--- | :--- | :--- | :--- |
+| **Rank 00** | [`libft`](./r00/libft) | C | Dynamic memory allocation, string manipulation, linked list data structures, unit test harness |
+| **Rank 01** | [`Born2beroot`](./r01/Born2beroot) | Linux, Bash | Debian VM architecture, LVM partitioning, SSH hardening, UFW firewall, sudoers, cron daemon |
+| | [`ft_printf`](./r01/ft_printf) | C | Variadic functions (`va_start`, `va_arg`), format string parsing, hex conversions |
+| | [`get_next_line`](./r01/get_next_line) | C | Static variables, dynamic heap buffer management, reading from arbitrary file descriptors |
+| **Rank 02** | [`minitalk`](./r02/minitalk) | C (Unix Signals) | Inter-Process Communication (IPC) via `SIGUSR1` and `SIGUSR2`, bit-shifting transmission |
+| | [`pipex`](./r02/pipex) | C (Unix Processes) | `fork()`, `execve()`, `pipe()`, `dup2()`, standard I/O redirection, environment path resolution |
+| | [`push_swap`](./r02/push_swap) | C (Algorithms) | Stack operations (`sa`, `pb`, `rr`, `rrr`), algorithmic complexity optimization, Butterfly sort |
+| | [`so_long`](./r02/so_long) | C (MLX42 Graphics) | Window management, 2D tile rendering, event handling, flood-fill map validation |
+| **Rank 03** | [`minishell`](./r03/minishell) | C (Systems) | Lexing, AST / command parsing, pipelines, redirections (`<`, `>`, `<<`, `>>`), signal trapping, built-ins |
+| | [`philosophers`](./r03/philosophers) | C (POSIX Threads) | Concurrent programming, POSIX mutexes, race conditions, deadlock prevention, Dining Philosophers |
+| **Rank 04** | [`cpp00` – `cpp04`](./r04/) | C++98 (OOP) | Canonical Form (orthodox), memory allocation (`new`/`delete`), inheritance, subtype polymorphism, abstract classes |
+| | [`miniRT`](./r04/miniRT) | C (Graphics & Math) | Vector algebra, ray-object intersection (spheres, planes, cylinders), Phong reflection model, shadows |
+| | [`NetPractice`](./r04/NetPractice) | Networking | IPv4 addressing, subnet masks (CIDR), routing tables, switch/router configurations |
+| **Rank 05** | [`cpp05` – `cpp09`](./r05/) | C++98 (Advanced) | Exception handling, C++ casts (`static_cast`, `dynamic_cast`), templates, STL algorithms, Ford-Johnson sort |
+| | [`inception`](./r05/inception) | Docker, SysAdmin | Multi-container microservices (NGINX, WordPress, MariaDB) with Docker Compose, TLSv1.3, persistent volumes |
+| | [`webserv`](./r05/webserv) | C++98 (Networking) | Non-blocking I/O multiplexing (`poll`/`epoll`/`kqueue`), RFC 7230 HTTP/1.1 parser, CGI execution engine |
 
 ---
 
