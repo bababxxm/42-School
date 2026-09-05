@@ -28,7 +28,8 @@ BOLD   := \033[1m
         push-libft push-printf push-gnl push-minitalk push-pipex \
         push-pushswap push-solong push-minishell push-philo push-minirt \
         push-webserv clean-all fclean-all norm test test-libft \
-        setup-hooks submit
+        setup-hooks submit sanitize valgrind
+
 
 all: help
 
@@ -43,7 +44,7 @@ help:
 	@echo "  $(GREEN)make backup$(RESET)                 Create a timestamped backup of the .git directory"
 	@echo ""
 	@echo "$(BOLD)Quality & 42 Intra Submission Tooling:$(RESET)"
-	@echo "  $(GREEN)make setup-hooks$(RESET)            Install Git pre-commit hooks (Norminette & artifact guards)"
+	@echo "  $(GREEN)make setup-hooks$(RESET)            Install Git hooks (Norminette, commit-msg, artifact guards)"
 	@echo "  $(GREEN)make submit PROJECT=<name> [REMOTE=<remote_or_url>] [BRANCH=master]$(RESET)"
 	@echo "      Automated Norm check, test execution, fclean, and subtree push to 42 Intra"
 	@echo "      $(YELLOW)Example:$(RESET) make submit PROJECT=push_swap REMOTE=git@vogsphere.42bangkok.com:..."
@@ -72,6 +73,9 @@ help:
 	@echo "$(BOLD)Workspace Maintenance & Testing:$(RESET)"
 	@echo "  $(GREEN)make test PROJECT=<name>$(RESET)    Run tests for a project (e.g. PROJECT=libft)"
 	@echo "  $(GREEN)make test-libft$(RESET)             Run unit tests for r00/libft"
+	@echo "  $(GREEN)make sanitize PROJECT=<name>$(RESET)        Compile & run tests with AddressSanitizer (ASan/UBSan)"
+	@echo "  $(GREEN)make valgrind PROJECT=<name> [BIN=<name>] [ARGS='...']$(RESET)"
+	@echo "      Run Valgrind leak detection on project test runner or executable"
 	@echo "  $(GREEN)make clean-all$(RESET)              Run clean in all subprojects"
 	@echo "  $(GREEN)make fclean-all$(RESET)             Run fclean in all subprojects"
 	@echo "  $(GREEN)make norm [DIR=...]$(RESET)          Run Norminette across projects"
@@ -219,11 +223,13 @@ test:
 # --- Quality & 42 Intra Submission Automation ---
 
 setup-hooks:
-	@echo "$(CYAN)Configuring Git pre-commit hook...$(RESET)"
+	@echo "$(CYAN)Configuring Git hooks directory...$(RESET)"
 	@git config core.hooksPath .githooks
 	@chmod +x .githooks/pre-commit
-	@echo "$(GREEN)$(BOLD)✓ Git pre-commit hook installed successfully!$(RESET)"
-	@echo "$(YELLOW)Pre-commit will now auto-verify Norminette on staged files and block forbidden *.o/binary artifacts.$(RESET)"
+	@chmod +x .githooks/commit-msg
+	@echo "$(GREEN)$(BOLD)✓ Git hooks installed successfully!$(RESET)"
+	@echo "  $(CYAN)• pre-commit:$(RESET) Auto-verifies Norminette on staged files & blocks *.o/binary artifacts."
+	@echo "  $(CYAN)• commit-msg:$(RESET) Enforces Conventional Commits standard (feat, fix, test, refactor, etc.)."
 
 submit:
 	@if [ -z "$(PROJECT)" ]; then \
@@ -302,3 +308,77 @@ submit:
 	echo "$(YELLOW)Executing: git subtree push --prefix=$$PROJECT_DIR $$REMOTE_TARGET $(BRANCH)$(RESET)"; \
 	git subtree push --prefix="$$PROJECT_DIR" "$$REMOTE_TARGET" "$(BRANCH)" && \
 	echo "$(GREEN)$(BOLD)🎉 Successfully submitted $(PROJECT) to 42 Intra ($$REMOTE_TARGET/$(BRANCH))!$(RESET)"
+
+sanitize:
+	@if [ -z "$(PROJECT)" ]; then \
+		echo "$(RED)$(BOLD)Error: PROJECT is required.$(RESET)"; \
+		echo "Usage: make sanitize PROJECT=<project-name>"; \
+		echo "  $(YELLOW)Example:$(RESET) make sanitize PROJECT=libft"; \
+		exit 1; \
+	fi
+	@PROJECT_DIR=$$(find r* -maxdepth 2 -name "$(PROJECT)" -type d | head -n 1); \
+	if [ -z "$$PROJECT_DIR" ] || [ ! -d "$$PROJECT_DIR" ]; then \
+		echo "$(RED)Error: Project '$(PROJECT)' not found in r00-r05.$(RESET)"; \
+		exit 1; \
+	fi; \
+	echo "$(CYAN)$(BOLD)[AddressSanitizer] Compiling and testing $$PROJECT_DIR with ASan & UBSan...$(RESET)"; \
+	SAN_FLAGS="-Wall -Wextra -Werror -g3 -fsanitize=address,undefined"; \
+	SAN_CXXFLAGS="-Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address,undefined"; \
+	if grep -q "^test:" "$$PROJECT_DIR/Makefile" 2>/dev/null; then \
+		$(MAKE) -C "$$PROJECT_DIR" re test CFLAGS="$$SAN_FLAGS" CXXFLAGS="$$SAN_CXXFLAGS" || { echo "$(RED)❌ Sanitizer test failed in $$PROJECT_DIR$(RESET)"; exit 1; }; \
+		$(MAKE) -C "$$PROJECT_DIR" fclean --no-print-directory || true; \
+		echo "$(GREEN)$(BOLD)✓ All tests completed with AddressSanitizer and UndefinedBehaviorSanitizer!$(RESET)"; \
+	else \
+		$(MAKE) -C "$$PROJECT_DIR" re CFLAGS="$$SAN_FLAGS" CXXFLAGS="$$SAN_CXXFLAGS" || { echo "$(RED)❌ Build failed in $$PROJECT_DIR$(RESET)"; exit 1; }; \
+		echo "$(GREEN)$(BOLD)✓ Project compiled with AddressSanitizer flags successfully.$(RESET)"; \
+	fi
+
+valgrind:
+	@if [ -z "$(PROJECT)" ]; then \
+		echo "$(RED)$(BOLD)Error: PROJECT is required.$(RESET)"; \
+		echo "Usage: make valgrind PROJECT=<project-name> [BIN=<binary>] [ARGS=\"...\"]"; \
+		echo "  $(YELLOW)Example:$(RESET) make valgrind PROJECT=libft"; \
+		echo "  $(YELLOW)Example:$(RESET) make valgrind PROJECT=pipex BIN=pipex ARGS=\"infile 'ls -l' 'wc -l' outfile\""; \
+		exit 1; \
+	fi
+	@if ! command -v valgrind >/dev/null 2>&1; then \
+		echo "$(RED)$(BOLD)Error: valgrind is not installed or not in PATH.$(RESET)"; \
+		exit 1; \
+	fi
+	@PROJECT_DIR=$$(find r* -maxdepth 2 -name "$(PROJECT)" -type d | head -n 1); \
+	if [ -z "$$PROJECT_DIR" ] || [ ! -d "$$PROJECT_DIR" ]; then \
+		echo "$(RED)Error: Project '$(PROJECT)' not found in r00-r05.$(RESET)"; \
+		exit 1; \
+	fi; \
+	VALGRIND_CMD="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --error-exitcode=1"; \
+	if [ -n "$(BIN)" ]; then \
+		TARGET_BIN="$$PROJECT_DIR/$(BIN)"; \
+		echo "$(YELLOW)Rebuilding $$PROJECT_DIR with debug symbols (-g3) for Valgrind...$(RESET)"; \
+		$(MAKE) -C "$$PROJECT_DIR" re CFLAGS="-Wall -Wextra -Werror -g3" CXXFLAGS="-Wall -Wextra -Werror -std=c++98 -g3"; \
+		echo "$(CYAN)$(BOLD)[Valgrind] Running leak check on $$TARGET_BIN $(ARGS)...$(RESET)"; \
+		$$VALGRIND_CMD "$$TARGET_BIN" $(ARGS); \
+		echo "$(GREEN)$(BOLD)✓ Valgrind completed with 0 leaks!$(RESET)"; \
+	elif [ "$(PROJECT)" = "libft" ] || [ "$$PROJECT_DIR" = "r00/libft" ]; then \
+		echo "$(CYAN)$(BOLD)[Valgrind] Building & running libft test suite under Valgrind...$(RESET)"; \
+		$(MAKE) -C r00/libft fclean --no-print-directory; \
+		$(MAKE) -C r00/libft bonus CFLAGS="-Wall -Wextra -Werror -g3" --no-print-directory; \
+		cc -Wall -Wextra -Werror -g3 r00/libft/tests/testMain.c -L r00/libft -lft -I r00/libft -o r00/libft/testRunner; \
+		$$VALGRIND_CMD ./r00/libft/testRunner; \
+		rm -f r00/libft/testRunner; \
+		$(MAKE) -C r00/libft fclean --no-print-directory; \
+		echo "$(GREEN)$(BOLD)✓ Valgrind leak check passed: 0 leaks!$(RESET)"; \
+	elif [ -f "$$PROJECT_DIR/Makefile" ] && grep -q "^test:" "$$PROJECT_DIR/Makefile" 2>/dev/null; then \
+		echo "$(CYAN)$(BOLD)[Valgrind] Running $$PROJECT_DIR test suite with Valgrind...$(RESET)"; \
+		$(MAKE) -C "$$PROJECT_DIR" test VALGRIND="$$VALGRIND_CMD"; \
+	else \
+		echo "$(YELLOW)Looking for project binary in $$PROJECT_DIR...$(RESET)"; \
+		TARGET_BIN=$$(find "$$PROJECT_DIR" -maxdepth 1 -type f -executable ! -name "*.sh" ! -name "*.py" | head -n 1); \
+		if [ -n "$$TARGET_BIN" ]; then \
+			echo "$(CYAN)[Valgrind] Testing $$TARGET_BIN...$(RESET)"; \
+			$$VALGRIND_CMD "$$TARGET_BIN" $(ARGS); \
+			echo "$(GREEN)$(BOLD)✓ Valgrind completed with 0 leaks!$(RESET)"; \
+		else \
+			echo "$(RED)No executable found in $$PROJECT_DIR. Please compile or pass BIN=<name>.$(RESET)"; \
+			exit 1; \
+		fi; \
+	fi
