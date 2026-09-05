@@ -23,7 +23,6 @@
 *.app
 
 # Specific project compiled binaries
-r02/pipex/pipex
 r02/so_long/so_long
 r02/push_swap/**/push_swap
 r02/push_swap/**/checker
