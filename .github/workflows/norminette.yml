@@ -2,25 +2,25 @@ name: 42 Norminette CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - '**.c'
-      - '**.h'
-      - '!**/tests/**'
-      - '!**/test/**'
+      - "**.c"
+      - "**.h"
+      - "!**/tests/**"
+      - "!**/test/**"
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - '**.c'
-      - '**.h'
-      - '!**/tests/**'
-      - '!**/test/**'
+      - "**.c"
+      - "**.h"
+      - "!**/tests/**"
+      - "!**/test/**"
   workflow_dispatch:
     inputs:
       target_dir:
-        description: 'Specific directory to check (leave empty for changed files)'
+        description: "Specific directory to check (leave empty for changed files)"
         required: false
-        default: ''
+        default: ""
 
 jobs:
   norminette:
@@ -36,7 +36,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install Norminette
         run: |
