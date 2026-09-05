@@ -31,7 +31,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -51,10 +51,15 @@ jobs:
         run: |
           echo "Detecting modified C and header files (excluding test suites)..."
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '\.(c|h)$' | grep -v -E '(^|/)tests?/' || true)
+            DIFF_TARGET="HEAD^1 HEAD"
+          elif [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            DIFF_TARGET="${{ github.event.before }} HEAD"
           else
-            FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -E '\.(c|h)$' | grep -v -E '(^|/)tests?/' || true)
+            DIFF_TARGET="HEAD~1 HEAD"
           fi
+
+          echo "Using diff target: $DIFF_TARGET"
+          FILES=$(git diff --name-only $DIFF_TARGET | grep -E '\.(c|h)$' | grep -v -E '(^|/)tests?/' || true)
 
           if [ -z "$FILES" ]; then
             echo "No project C/header files modified (or only test files changed). Skipping."
