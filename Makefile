@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sklaokli <sklaokli@student.42bangkok.com>    +#+  +:+       +#+         #
+#    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/09/05 15:10:00 by sklaokli          #+#    #+#              #
-#    Updated: 2026/09/05 15:10:00 by sklaokli         ###   ########.fr        #
+#    Created: 2026/09/05 15:11:14 by sklaokli          #+#    #+#              #
+#    Updated: 2026/09/05 15:12:05 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -176,7 +176,7 @@ fclean-all:
 	done
 	@echo "$(GREEN)Done fcleaning all build artifacts.$(RESET)"
 
-norm:
+norm norminette:
 	@if [ -n "$(DIR)" ]; then \
 		echo "$(YELLOW)Running norminette on $(DIR)...$(RESET)"; \
 		norminette $(DIR); \

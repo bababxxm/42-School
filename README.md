@@ -9,6 +9,8 @@
 ![Shell](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 
+[![42 Norminette CI](https://github.com/bababxxm/42-School/actions/workflows/norminette.yml/badge.svg)](https://github.com/bababxxm/42-School/actions/workflows/norminette.yml)
+
 </div>
 
 ---
