@@ -71,3 +71,39 @@ To add automated tests to any project (e.g. `r02/push_swap` or `r03/minishell`):
    fclean: clean
    	$(RM) $(NAME) testRunner
    ```
+
+---
+
+## 5. 🛡️ Local Git Pre-Commit Hook
+
+Install the automated pre-commit hook with a single command:
+
+```bash
+make setup-hooks
+```
+
+### What It Does:
+* **Auto-Norminette**: Whenever you run `git commit`, the hook automatically runs `norminette` on all staged `.c` and `.h` files (ignoring `tests/`). If there are any Norm errors, Git blocks the commit and highlights the line numbers.
+* **Artifact Blocker**: Blocks accidental staging of `*.o`, `*.a`, `.DS_Store`, or compiled binary executables.
+* **Bypass (if needed)**: Use `git commit --no-verify` in emergency situations to bypass local checks.
+
+---
+
+## 6. 📦 42 Intra / Vogsphere Submission Pipeline
+
+When ready to submit a project for peer defense and Moulinette evaluation:
+
+```bash
+make submit PROJECT=libft REMOTE=git@vogsphere.42bangkok.com:vogsphere/intra-...
+```
+
+### Automated 4-Step Pipeline:
+1. **[Step 1/4] Norminette Quality Gate**: Runs `make norm DIR=rXX/<project>`. If any Norm error exists, **aborts immediately**.
+2. **[Step 2/4] Automated Tests**: Executes `make test PROJECT=<project>` to ensure all unit tests pass before submission.
+3. **[Step 3/4] Build Object Cleanup**: Runs `make fclean` in the project folder to guarantee no compiled objects are sent.
+4. **[Step 4/4] Subtree Push**: Uses `git subtree push` to push only the clean project directory directly to the root of the 42 Intra remote.
+
+*Note: Once you provide a git URL for a project, it is saved under remote `vogsphere-<project>`. For subsequent submissions of the same project, you can simply run:*
+```bash
+make submit PROJECT=libft
+```

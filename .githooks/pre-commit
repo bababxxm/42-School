@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# **************************************************************************** #
+#                                                                              #
+#    42-School Monorepo Pre-Commit Hook                                        #
+#                                                                              #
+# **************************************************************************** #
+
+set -e
+
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+CYAN="\033[36m"
+BOLD="\033[1m"
+RESET="\033[0m"
+
+# 1. Block prohibited build objects and binaries from being committed
+FORBIDDEN_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(o|a|so|dylib|out)$|(\.DS_Store)$|(\.vscode/)' || true)
+if [ -n "$FORBIDDEN_FILES" ]; then
+    echo -e "${RED}${BOLD}[42 Pre-Commit ERROR] Prohibited build or editor files staged:${RESET}"
+    echo "$FORBIDDEN_FILES" | sed 's/^/  • /'
+    echo -e "${YELLOW}Please clean your workspace (e.g. 'make fclean-all') before committing.${RESET}"
+    exit 1
+fi
+
+# 2. Check for staged .c and .h files outside test directories
+STAGED_C_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(c|h)$' | grep -v -E '(^|/)tests?/' || true)
+
+if [ -z "$STAGED_C_FILES" ]; then
+    exit 0
+fi
+
+# 3. Check Norminette if available
+if ! command -v norminette &>/dev/null; then
+    echo -e "${YELLOW}${BOLD}[42 Pre-Commit WARNING] Norminette is not installed or not in PATH.${RESET}"
+    echo -e "${YELLOW}Skipping local Norm check. (GitHub Actions CI will still verify on PR).${RESET}"
+    exit 0
+fi
+
+echo -e "${CYAN}[42 Pre-Commit]${RESET} Checking $(echo "$STAGED_C_FILES" | wc -l) staged source file(s) with Norminette..."
+NORM_OUTPUT=$(norminette $STAGED_C_FILES 2>&1 || true)
+
+if echo "$NORM_OUTPUT" | grep -q "Error!"; then
+    echo -e "${RED}${BOLD}[42 Pre-Commit FAILED] Norminette errors detected in staged files:${RESET}"
+    echo "$NORM_OUTPUT" | grep -E "Error!|Notice:" | sed 's/^/  /'
+    echo ""
+    echo -e "${YELLOW}Please fix the Norm errors before committing.${RESET}"
+    echo -e "${YELLOW}(Use 'git commit --no-verify' if you explicitly need to bypass this hook).${RESET}"
+    exit 1
+fi
+
+echo -e "${GREEN}${BOLD}[42 Pre-Commit PASSED]${RESET} 0 Norm errors. Ready to commit!"
+exit 0
