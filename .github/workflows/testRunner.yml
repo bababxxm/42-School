@@ -1,0 +1,100 @@
+name: Project Test Runner
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      project:
+        description: "Choose which project to test"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - libft
+          - push_swap
+          - minishell
+          - so_long
+          - webserv
+
+jobs:
+  run-tests:
+    name: Run Automated Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Install Build Tools & Valgrind
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq build-essential valgrind
+
+      - name: Selective Pipeline Testing (on Push / PR)
+        if: "${{ github.event_name != 'workflow_dispatch' }}"
+        run: |
+          echo "Detecting modified projects for selective testing..."
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            DIFF_TARGET="origin/${{ github.base_ref }}...HEAD"
+          else
+            DIFF_TARGET="HEAD~1 HEAD"
+          fi
+
+          CHANGED_DIRS=$(git diff --name-only $DIFF_TARGET 2>/dev/null | cut -d/ -f1-2 | sort -u || true)
+          echo "Modified directories: $CHANGED_DIRS"
+
+          FOUND_TEST=0
+          for dir in $CHANGED_DIRS; do
+            if [ -f "$dir/Makefile" ] && grep -q "^test:" "$dir/Makefile" 2>/dev/null; then
+              echo "========================================="
+              echo "Running tests for $dir..."
+              echo "========================================="
+              make -C "$dir" test
+              make -C "$dir" fclean
+              FOUND_TEST=1
+            fi
+          done
+
+          if [ $FOUND_TEST -eq 0 ]; then
+            echo "No test-enabled projects modified in this commit. Skipping."
+          fi
+
+      - name: Manual Project Testing (Workflow Dispatch)
+        if: "${{ github.event_name == 'workflow_dispatch' }}"
+        run: |
+          TARGET="${{ github.event.inputs.project }}"
+          echo "Running manual tests for target: $TARGET"
+
+          if [ "$TARGET" = "all" ]; then
+            echo "Testing all projects with available test suites..."
+            find r* -name "Makefile" | while read -r mf; do
+              dir=$(dirname "$mf")
+              if grep -q "^test:" "$mf" 2>/dev/null; then
+                echo "Running tests in $dir..."
+                make -C "$dir" test
+                make -C "$dir" fclean
+              fi
+            done
+          elif [ "$TARGET" = "libft" ]; then
+            make -C r00/libft test
+            make -C r00/libft fclean
+          else
+            found=0
+            for d in $(find r* -maxdepth 2 -name "$TARGET" -type d); do
+              if [ -f "$d/Makefile" ] && grep -q "^test:" "$d/Makefile" 2>/dev/null; then
+                echo "Running tests in $d..."
+                make -C "$d" test
+                make -C "$d" fclean
+                found=1
+              fi
+            done
+            if [ $found -eq 0 ]; then
+              echo "No test target found for $TARGET."
+            fi
+          fi
