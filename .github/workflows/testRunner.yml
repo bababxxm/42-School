@@ -29,7 +29,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Install Build Tools & Valgrind
         run: |
@@ -41,13 +41,21 @@ jobs:
         run: |
           echo "Detecting modified projects for selective testing..."
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            DIFF_TARGET="origin/${{ github.base_ref }}...HEAD"
+            DIFF_TARGET="HEAD^1 HEAD"
+          elif [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            DIFF_TARGET="${{ github.event.before }} HEAD"
           else
             DIFF_TARGET="HEAD~1 HEAD"
           fi
 
-          CHANGED_DIRS=$(git diff --name-only $DIFF_TARGET 2>/dev/null | cut -d/ -f1-2 | sort -u || true)
-          echo "Modified directories: $CHANGED_DIRS"
+          echo "Using diff target: $DIFF_TARGET"
+          CHANGED_FILES=$(git diff --name-only $DIFF_TARGET || true)
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          CHANGED_DIRS=$(echo "$CHANGED_FILES" | cut -d/ -f1-2 | sort -u | grep -E '^r[0-9]{2}/' || true)
+          echo "Modified project directories:"
+          echo "$CHANGED_DIRS"
 
           FOUND_TEST=0
           for dir in $CHANGED_DIRS; do
@@ -62,7 +70,7 @@ jobs:
           done
 
           if [ $FOUND_TEST -eq 0 ]; then
-            echo "No test-enabled projects modified in this commit. Skipping."
+            echo "No test-enabled projects modified in this PR / commit. Skipping."
           fi
 
       - name: Manual Project Testing (Workflow Dispatch)

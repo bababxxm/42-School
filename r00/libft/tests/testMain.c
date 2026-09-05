@@ -108,14 +108,21 @@ static void	test_alloc_and_conversions(void)
 	char	*join;
 	char	*trim;
 	char	*itoa_val;
+	char	*itoa_zero;
+	char	*itoa_min;
 	char	**split;
+	char	**split_empty;
 	int		split_ok;
+	void	*calloc_zero;
 
 	printf("%s--- Allocations & Conversions ---%s\n", COLOR_CYAN, COLOR_RESET);
 	test_check("ft_atoi(\"42\")", ft_atoi("42") == 42);
 	test_check("ft_atoi(\"   -2147483648\")", ft_atoi("   -2147483648") ==
 		-2147483648LL);
 	test_check("ft_atoi(\" +42abc\")", ft_atoi(" +42abc") == 42);
+	calloc_zero = ft_calloc(0, 0);
+	test_check("ft_calloc(0, 0) allocates", calloc_zero != NULL);
+	free(calloc_zero);
 	dup = ft_strdup("42 Bangkok");
 	test_check("ft_strdup", dup != NULL && strcmp(dup, "42 Bangkok") == 0);
 	free(dup);
@@ -132,6 +139,13 @@ static void	test_alloc_and_conversions(void)
 	test_check("ft_itoa(-12345)", itoa_val != NULL && strcmp(itoa_val,
 			"-12345") == 0);
 	free(itoa_val);
+	itoa_zero = ft_itoa(0);
+	test_check("ft_itoa(0)", itoa_zero != NULL && strcmp(itoa_zero, "0") == 0);
+	free(itoa_zero);
+	itoa_min = ft_itoa(-2147483648);
+	test_check("ft_itoa(INT_MIN)", itoa_min != NULL && strcmp(itoa_min,
+			"-2147483648") == 0);
+	free(itoa_min);
 	split = ft_split("split**this*string*properly", '*');
 	split_ok = (split != NULL && split[0] && strcmp(split[0], "split") == 0
 			&& split[1] && strcmp(split[1], "this") == 0 && split[2]
@@ -144,6 +158,10 @@ static void	test_alloc_and_conversions(void)
 			free(split[i]);
 		free(split);
 	}
+	split_empty = ft_split("*****", '*');
+	test_check("ft_split with only delimiters", split_empty != NULL
+		&& split_empty[0] == NULL);
+	free(split_empty);
 }
 
 static void	noop_del(void *content)
