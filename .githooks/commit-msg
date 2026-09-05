@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# **************************************************************************** #
+#                                                                              #
+#    42-School Monorepo Conventional Commits Hook                              #
+#                                                                              #
+# **************************************************************************** #
+
+set -e
+
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+CYAN="\033[36m"
+BOLD="\033[1m"
+RESET="\033[0m"
+
+COMMIT_MSG_FILE="$1"
+
+if [ -z "$COMMIT_MSG_FILE" ] || [ ! -f "$COMMIT_MSG_FILE" ]; then
+    echo -e "${RED}${BOLD}[Commit-Msg ERROR] No commit message file provided.${RESET}"
+    exit 1
+fi
+
+# Extract the first non-comment line of the commit message
+COMMIT_FIRST_LINE=$(grep -v '^[[:space:]]*#' "$COMMIT_MSG_FILE" | head -n 1 || true)
+
+# Allow empty message to be handled by Git itself
+if [ -z "$COMMIT_FIRST_LINE" ]; then
+    exit 0
+fi
+
+# Allow merge commits, squash/fixup commits, and version tags
+if echo "$COMMIT_FIRST_LINE" | grep -qE '^(Merge (branch|pull request|remote-tracking branch)|(fixup|squash)!|v[0-9]+\.[0-9]+)'; then
+    exit 0
+fi
+
+# Conventional Commit Regex
+# Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+CONVENTIONAL_REGEX="^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-zA-Z0-9_\.\/-]+\))?!?: .+$"
+
+if ! echo "$COMMIT_FIRST_LINE" | grep -qE "$CONVENTIONAL_REGEX"; then
+    echo ""
+    echo -e "${RED}${BOLD}========================================================================${RESET}"
+    echo -e "${RED}${BOLD}[42 Commit-Msg ERROR] Invalid commit message format!${RESET}"
+    echo -e "${RED}${BOLD}========================================================================${RESET}"
+    echo ""
+    echo -e "  ${BOLD}Your commit message was:${RESET}"
+    echo -e "    ${YELLOW}\"$COMMIT_FIRST_LINE\"${RESET}"
+    echo ""
+    echo -e "  ${BOLD}Expected Conventional Commits structure:${RESET}"
+    echo -e "    ${GREEN}<type>(<scope>): <subject>${RESET}  or  ${GREEN}<type>: <subject>${RESET}"
+    echo ""
+    echo -e "  ${BOLD}Allowed types:${RESET}"
+    echo -e "    ${CYAN}feat${RESET}     New feature or module implementation"
+    echo -e "    ${CYAN}fix${RESET}      Bug fix or norm error correction"
+    echo -e "    ${CYAN}docs${RESET}     Documentation, README updates, comments"
+    echo -e "    ${CYAN}style${RESET}    Code formatting, whitespace, 42 headers"
+    echo -e "    ${CYAN}refactor${RESET} Code refactoring without changing behavior"
+    echo -e "    ${CYAN}perf${RESET}     Performance optimizations"
+    echo -e "    ${CYAN}test${RESET}     Adding or updating unit/integration tests"
+    echo -e "    ${CYAN}build${RESET}    Makefile, compilation, or dependency changes"
+    echo -e "    ${CYAN}ci${RESET}       GitHub Actions, CI workflows"
+    echo -e "    ${CYAN}chore${RESET}    Repo maintenance, git configuration, tool scripts"
+    echo -e "    ${CYAN}revert${RESET}   Reverting a previous commit"
+    echo ""
+    echo -e "  ${BOLD}Examples:${RESET}"
+    echo -e "    ${GREEN}feat(libft): implement ft_split and ft_strjoin${RESET}"
+    echo -e "    ${GREEN}fix(pipex): handle empty PATH environment variable${RESET}"
+    echo -e "    ${GREEN}test(push_swap): add butterfly sort benchmark tests${RESET}"
+    echo -e "    ${GREEN}docs: update rank progress table in README${RESET}"
+    echo ""
+    echo -e "  ${YELLOW}(Tip: Use 'git commit --no-verify' if you must bypass this check).${RESET}"
+    echo -e "${RED}${BOLD}========================================================================${RESET}"
+    echo ""
+    exit 1
+fi
+
+exit 0
