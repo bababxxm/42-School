@@ -60,3 +60,8 @@ imgui.ini
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Generated archives in so_long libraries
+r02/so_long/libraries/get_next_line/get_next_line
+r02/so_long/libraries/libft/libft
+backups/
