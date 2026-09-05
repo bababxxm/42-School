@@ -1,6 +1,53 @@
-# 42 Common Core Portfolio
+# 🌟 42 School — Common Core Journey
 
-A centralized monorepo containing all projects developed throughout the **42 Common Core** curriculum.
+<div align="center">
+
+![42 School](https://img.shields.io/badge/42%20Bangkok-sklaokli-000000?style=for-the-badge&logo=42&logoColor=white)
+![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
+![C++](https://img.shields.io/badge/C++98-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Shell](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+
+</div>
+
+---
+
+## 📖 About
+
+Welcome! I’m **sklaokli** ([@bababxxm](https://github.com/bababxxm)), a software engineering student at **42 Bangkok**.
+
+**42** is an innovative, tuition-free, peer-driven, and teacher-free coding school. The curriculum centers on deep algorithmic problem-solving, low-level systems programming, operating system primitives, computer graphics, and networking.
+
+This repository serves as a centralized monorepo showcasing my complete **42 Common Core** journey, documenting projects from fundamental C libraries up through complex multi-threaded concurrency, raytracing engines, and an asynchronous HTTP/1.1 web server from scratch.
+
+---
+
+## 🌐 The 42 Ecosystem & Environment
+
+42 School challenges students to become autonomous problem-solvers through strict constraints, peer reviews, and automated verification:
+
+### 📝 Norminette (The Coding Standard)
+Almost every C project must strictly adhere to the **Norm** (enforced by `norminette`). This ensures code readability, modular design, and industry-grade standards:
+* **25 lines maximum** per function (excluding curly braces).
+* **80 columns maximum** per line.
+* **4 parameters maximum** per function.
+* **5 variable declarations maximum** per function (declared at top of block).
+* **Strict prohibition** of `for`, `do...while`, `switch`, `case`, `goto`, and ternary operators.
+* **No inline assignment** on variable declaration (unless `static` or `const`).
+* Mandatory standard 42 file headers and prototypes.
+
+### 🤖 Moulinette (Automated Evaluator)
+**Moulinette** is 42's rigorous automated grading engine. Submissions undergo intensive testing:
+* **Norm validation** ✅
+* **Functional accuracy** against hidden test suites and edge cases 🛠️
+* **Strict memory safety**: Zero memory leaks and zero invalid reads/writes (checked via Valgrind / AddressSanitizer) 💾
+* **Crash resistance**: Immediate grade 0 if segmentation fault, bus error, or double-free occurs.
+
+### 👥 Peer Evaluations & The Blackhole
+* **Peer Defense**: Every project is defended in person before 2 to 3 peer evaluators who review code line-by-line, run edge-case tests, and verify conceptual comprehension.
+* **Grades**: Scored from 0 to 125 (including bonus features).
+* **The Blackhole**: A survival countdown timer. Passing projects awards days to keep your Blackhole counter positive.
 
 ---
 
@@ -27,53 +74,64 @@ A centralized monorepo containing all projects developed throughout the **42 Com
 
 ---
 
-## 🛠️ Repository Structure
+## 🗂️ Repository Architecture
 
 ```
-common-core/
+42-School/
 ├── r00/
-│   └── libft/                 # Custom C standard library
+│   └── libft/                 # Custom libc & data structures
 ├── r01/
-│   ├── Born2beroot/           # VM setup and monitoring script
-│   ├── ft_printf/             # Formatted output printing
+│   ├── Born2beroot/           # VM setup documentation & monitoring script
+│   ├── ft_printf/             # Reimplementation of printf
 │   └── get_next_line/         # Reading lines from file descriptors
 ├── r02/
-│   ├── minitalk/              # Signal-based IPC
-│   ├── pipex/                 # UNIX pipes and redirections
-│   ├── push_swap/             # Stack sorting algorithm
+│   ├── minitalk/              # Signal-based IPC client-server
+│   ├── pipex/                 # UNIX pipelines and redirection
+│   ├── push_swap/             # Stack sorting algorithm (trials & optimization)
 │   └── so_long/               # 2D game using MLX42
 ├── r03/
-│   ├── minishell/             # UNIX shell
-│   └── philosophers/          # Multithreading with mutexes
+│   ├── minishell/             # Custom UNIX shell implementation
+│   └── philosophers/          # Multithreading concurrency simulation
 ├── r04/
-│   ├── cpp00/ – cpp04/        # C++ Modules (Pointers, OOP, Polymorphism)
-│   ├── miniRT/                # Raytracer
-│   └── NetPractice/           # Networking and routing practice
+│   ├── cpp00/ – cpp04/        # C++ Object-Oriented Programming modules
+│   ├── miniRT/                # Raytracer rendering 3D geometric shapes
+│   └── NetPractice/           # Network configuration exercises
 └── r05/
-    ├── cpp05/ – cpp09/        # C++ Modules (Exceptions, Templates, STL)
-    ├── inception/             # Dockerized LEMP infrastructure
-    └── webserv/               # Non-blocking HTTP/1.1 web server
+    ├── cpp05/ – cpp09/        # Advanced C++ (Exceptions, Templates, STL)
+    ├── inception/             # Docker Compose LEMP infrastructure
+    └── webserv/               # Asynchronous HTTP/1.1 web server
 ```
 
 ---
 
-## 🚀 Building & Testing
+## 🛠️ Compilation & Usage
 
-Each project contains its own `Makefile` adhering to the 42 Norm (providing `all`, `clean`, `fclean`, and `re` rules).
+All projects provide standard Makefiles with required targets: `all`, `clean`, `fclean`, `re`.
 
-To compile any project:
+### Compiling a C Project
 ```bash
-cd rXX/<project-name>
+cd r02/so_long
 make
+./so_long maps/map.ber
 ```
 
-For C++ modules:
+### Compiling a C++ Exercise
 ```bash
-cd r0X/cpp0X/ex0X
+cd r04/cpp00/ex00
 make
+./megaphone "shhhhh... I think the students are asleep..."
+```
+
+### Running Norminette
+To verify Norm compliance across C source files:
+```bash
+norminette r00/libft/
 ```
 
 ---
 
 ## 👤 Author
-* **Sorawit Klaokliang** - 42 Bangkok (`sklaokli`) - [GitHub](https://github.com/bababxxm)
+
+* **Sorawit Klaokliang** (`sklaokli`)
+* Student at **42 Bangkok**
+* GitHub: [@bababxxm](https://github.com/bababxxm)
