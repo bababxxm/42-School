@@ -25,7 +25,7 @@ RESET  := \033[0m
 BOLD   := \033[1m
 
 .PHONY: all help push pull status remotes backup subpush subpull \
-        push-libft push-printf push-gnl push-minitalk push-pipex \
+        push-libft push-printf push-gnl push-minitalk \
         push-pushswap push-solong push-minishell push-philo push-minirt \
         push-webserv clean-all fclean-all norm test test-libft \
         setup-hooks submit sanitize valgrind
@@ -62,7 +62,6 @@ help:
 	@echo "  $(GREEN)make push-printf REMOTE=<remote>$(RESET)     Push r01/ft_printf"
 	@echo "  $(GREEN)make push-gnl REMOTE=<remote>$(RESET)        Push r01/get_next_line"
 	@echo "  $(GREEN)make push-minitalk REMOTE=<remote>$(RESET)   Push r02/minitalk"
-	@echo "  $(GREEN)make push-pipex REMOTE=<remote>$(RESET)      Push r02/pipex"
 	@echo "  $(GREEN)make push-pushswap REMOTE=<remote>$(RESET)   Push r02/push_swap"
 	@echo "  $(GREEN)make push-solong REMOTE=<remote>$(RESET)     Push r02/so_long"
 	@echo "  $(GREEN)make push-minishell REMOTE=<remote>$(RESET)  Push r03/minishell"
@@ -143,9 +142,6 @@ push-gnl:
 
 push-minitalk:
 	@$(MAKE) subpush DIR=r02/minitalk REMOTE=$(REMOTE) BRANCH=$(BRANCH)
-
-push-pipex:
-	@$(MAKE) subpush DIR=r02/pipex REMOTE=$(REMOTE) BRANCH=$(BRANCH)
 
 push-pushswap:
 	@$(MAKE) subpush DIR=r02/push_swap REMOTE=$(REMOTE) BRANCH=$(BRANCH)
@@ -338,7 +334,7 @@ valgrind:
 		echo "$(RED)$(BOLD)Error: PROJECT is required.$(RESET)"; \
 		echo "Usage: make valgrind PROJECT=<project-name> [BIN=<binary>] [ARGS=\"...\"]"; \
 		echo "  $(YELLOW)Example:$(RESET) make valgrind PROJECT=libft"; \
-		echo "  $(YELLOW)Example:$(RESET) make valgrind PROJECT=pipex BIN=pipex ARGS=\"infile 'ls -l' 'wc -l' outfile\""; \
+		echo "  $(YELLOW)Example:$(RESET) make valgrind PROJECT=so_long BIN=so_long ARGS=\"maps/valid/map.ber\""; \
 		exit 1; \
 	fi
 	@if ! command -v valgrind >/dev/null 2>&1; then \

@@ -54,7 +54,7 @@ Strict adherence to C++98 and **Object-Oriented Canonical Form**:
 ### Branch Naming Convention
 Always develop new features, bug fixes, or tests in a dedicated branch:
 * `feat/<project>-<description>` (e.g. `feat/minishell-heredoc`)
-* `fix/<project>-<description>`  (e.g. `fix/pipex-fds`)
+* `fix/<project>-<description>`  (e.g. `fix/so_long-floodfill`)
 * `test/<project>-<description>` (e.g. `test/libft-memory`)
 * `docs/<description>`           (e.g. `docs/style-guide`)
 

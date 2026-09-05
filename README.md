@@ -81,7 +81,6 @@ flowchart LR
     end
 
     subgraph Circle02 ["Rank 02: Unix & Graphics"]
-        pipex["pipex<br/><i>Pipes & Redirections</i>"]
         push_swap["push_swap<br/><i>Sorting Algorithms</i>"]
         so_long["so_long<br/><i>2D MLX42 Game</i>"]
         minitalk["minitalk<br/><i>Signal-based IPC</i>"]
@@ -105,8 +104,8 @@ flowchart LR
     end
 
     libft --> printf & gnl & b2br
-    printf & gnl --> pipex & push_swap & so_long & minitalk
-    pipex & push_swap --> minishell & philo
+    printf & gnl --> push_swap & so_long & minitalk
+    push_swap & minitalk & so_long --> minishell & philo
     minishell & philo --> cpp00_04 & miniRT & netpractice
     cpp00_04 & miniRT --> cpp05_09 & webserv & inception
 ```
@@ -122,7 +121,6 @@ flowchart LR
 | | [`ft_printf`](./r01/ft_printf) | C | Variadic functions (`va_start`, `va_arg`), format string parsing, hex conversions |
 | | [`get_next_line`](./r01/get_next_line) | C | Static variables, dynamic heap buffer management, reading from arbitrary file descriptors |
 | **Rank 02** | [`minitalk`](./r02/minitalk) | C (Unix Signals) | Inter-Process Communication (IPC) via `SIGUSR1` and `SIGUSR2`, bit-shifting transmission |
-| | [`pipex`](./r02/pipex) | C (Unix Processes) | `fork()`, `execve()`, `pipe()`, `dup2()`, standard I/O redirection, environment path resolution |
 | | [`push_swap`](./r02/push_swap) | C (Algorithms) | Stack operations (`sa`, `pb`, `rr`, `rrr`), algorithmic complexity optimization, Butterfly sort |
 | | [`so_long`](./r02/so_long) | C (MLX42 Graphics) | Window management, 2D tile rendering, event handling, flood-fill map validation |
 | **Rank 03** | [`minishell`](./r03/minishell) | C (Systems) | Lexing, AST / command parsing, pipelines, redirections (`<`, `>`, `<<`, `>>`), signal trapping, built-ins |
@@ -148,7 +146,6 @@ flowchart LR
 │   └── get_next_line/         # Reading lines from file descriptors
 ├── r02/
 │   ├── minitalk/              # Signal-based IPC client-server
-│   ├── pipex/                 # UNIX pipelines and redirection
 │   ├── push_swap/             # Stack sorting algorithm (trials & optimization)
 │   └── so_long/               # 2D game using MLX42
 ├── r03/
@@ -207,7 +204,7 @@ make valgrind PROJECT=libft
 #### 2. Automated 42 Intra Submission (`make submit`)
 Deploy any project directly to your 42 Vogsphere evaluation repository without manual git subtree hassle:
 ```bash
-make submit PROJECT=pipex REMOTE=git@vogsphere.42bangkok.com:vogsphere/intra-uuid-...
+make submit PROJECT=push_swap REMOTE=git@vogsphere.42bangkok.com:vogsphere/intra-uuid-...
 ```
 > **Pre-flight Quality Gate:** The pipeline automatically verifies 0 Norminette errors, runs automated tests, runs `fclean`, and performs a clean `git subtree push`.
 
