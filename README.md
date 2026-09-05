@@ -1,4 +1,4 @@
-# 🌟 42 School — Common Core Journey
+# 🌟 42 School — Free Programming School
 
 <div align="center">
 
@@ -111,17 +111,38 @@ Almost every C project must strictly adhere to the **Norm** (enforced by `normin
 
 ---
 
-## 🛠️ Compilation & Usage
+#### 1. Zero-Leak Memory Safety Verification
+
+Audit dynamic memory allocation and ensure 0 leaks before an evaluation:
+
+```bash
+# Compile and test with AddressSanitizer (detects out-of-bounds, heap overflow, use-after-free)
+make sanitize PROJECT=libft
 
 All projects provide standard Makefiles with required targets: `all`, `clean`, `fclean`, `re`.
 
-### Compiling a C Project
+#### 2. Automated 42 Intra Submission (`make submit`)
+
+Deploy any project directly to your 42 Vogsphere evaluation repository without manual git subtree hassle:
+
+```bash
+make submit PROJECT=pipex REMOTE=git@vogsphere.42bangkok.com:vogsphere/intra-uuid-...
+```
+
+> **Pre-flight Quality Gate:** The pipeline automatically verifies 0 Norminette errors, runs automated tests, runs `fclean`, and performs a clean `git subtree push`.
+
+#### 3. Installing Local Git Hooks
 
 ```bash
 cd r02/so_long
 make
 ./so_long maps/map.ber
 ```
+
+Activates:
+
+- **`pre-commit`**: Blocks accidental commits of compiled `.o`/binary objects and auto-runs Norminette on staged `.c`/`.h` files.
+- **`commit-msg`**: Enforces industry-standard [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `test:`, `refactor:`, etc.).
 
 ### Compiling a C++ Exercise
 
