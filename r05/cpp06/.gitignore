@@ -1,0 +1,15 @@
+*.o
+*.d
+*.pdf
+.DS_Store
+.DS_Store?
+*.dSYM/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+a.out
+test
+bin/
+/Makefile

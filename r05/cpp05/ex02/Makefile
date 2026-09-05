@@ -1,0 +1,58 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/01/22 21:26:37 by sklaokli          #+#    #+#              #
+#    Updated: 2026/01/22 21:26:37 by sklaokli         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME		:=	a.out
+
+SRC_DIR		:=	src
+OBJ_DIR		:=	bin
+INC_DIR		:=	include
+
+CLASS		:=	Bureaucrat \
+				AForm \
+				PresidentialPardonForm \
+				RobotomyRequestForm \
+				ShrubberyCreationForm
+
+FILES		:=	main.cpp \
+				$(addsuffix .cpp, $(CLASS))
+
+SRC			:=	$(addprefix $(SRC_DIR)/, $(FILES))
+OBJ			:=	$(addprefix $(OBJ_DIR)/, $(FILES:%.cpp=%.o))
+HEADER		:=	$(addprefix $(INC_DIR)/, $(addsuffix .hpp, $(CLASS)))
+
+CXX			:=	c++
+WFLAGS		:=	-Wall -Wextra -Werror
+STDFLAGS	:=	-std=c++98 -pedantic
+INCLUDE		:=	-I$(INC_DIR)
+
+COMPILE		:=	$(CXX) $(WFLAGS) $(STDFLAGS) $(INCLUDE)
+
+all:	$(NAME)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADER) | $(OBJ_DIR)
+	$(COMPILE) -c $< -o $@
+
+$(NAME): $(OBJ)
+	$(COMPILE) $(OBJ) -o $(NAME)
+
+clean:
+	rm -rf $(OBJ_DIR) *_shrubbery
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
