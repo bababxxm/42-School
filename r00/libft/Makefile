@@ -36,13 +36,18 @@ all: ${NAME}
 
 bonus: ${NAME} ${OBJS_BONUS}
 	${LIBC} ${NAME} ${OBJS_BONUS}
+
+test: bonus
+	@${CC} ${CFLAGS} tests/testMain.c -L. -lft -I. -o testRunner
+	@./testRunner
+	@${RM} testRunner
 	
 clean:
 	${RM} ${OBJS} ${OBJS_BONUS}
 
 fclean: clean
-	${RM} ${NAME} ${bonus} 
+	${RM} ${NAME} ${bonus} testRunner
 
 re: fclean all
 
-.PHONY : all bonus clean fclean re
+.PHONY : all bonus clean fclean re test

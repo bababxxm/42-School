@@ -27,7 +27,7 @@ BOLD   := \033[1m
 .PHONY: all help push pull status remotes backup subpush subpull \
         push-libft push-printf push-gnl push-minitalk push-pipex \
         push-pushswap push-solong push-minishell push-philo push-minirt \
-        push-webserv clean-all fclean-all norm
+        push-webserv clean-all fclean-all norm test test-libft
 
 all: help
 
@@ -62,7 +62,9 @@ help:
 	@echo "  $(GREEN)make push-minirt REMOTE=<remote>$(RESET)     Push r04/miniRT"
 	@echo "  $(GREEN)make push-webserv REMOTE=<remote>$(RESET)    Push r05/webserv"
 	@echo ""
-	@echo "$(BOLD)Workspace Maintenance:$(RESET)"
+	@echo "$(BOLD)Workspace Maintenance & Testing:$(RESET)"
+	@echo "  $(GREEN)make test PROJECT=<name>$(RESET)    Run tests for a project (e.g. PROJECT=libft)"
+	@echo "  $(GREEN)make test-libft$(RESET)             Run unit tests for r00/libft"
 	@echo "  $(GREEN)make clean-all$(RESET)              Run clean in all subprojects"
 	@echo "  $(GREEN)make fclean-all$(RESET)             Run fclean in all subprojects"
 	@echo "  $(GREEN)make norm [DIR=...]$(RESET)          Run Norminette across projects"
@@ -183,4 +185,26 @@ norm norminette:
 	else \
 		echo "$(YELLOW)Running norminette on all C projects...$(RESET)"; \
 		norminette r00/ r01/ r02/ r03/ r04/miniRT 2>/dev/null || norminette r00/; \
+	fi
+
+test-libft:
+	@$(MAKE) -C r00/libft test
+
+test:
+	@if [ -z "$(PROJECT)" ]; then \
+		echo "$(RED)Error: Please specify PROJECT (e.g. make test PROJECT=libft)$(RESET)"; \
+		exit 1; \
+	fi
+	@if [ "$(PROJECT)" = "libft" ]; then \
+		$(MAKE) -C r00/libft test; \
+	else \
+		found=0; \
+		for d in $$(find r* -maxdepth 2 -name "$(PROJECT)" -type d); do \
+			found=1; \
+			$(MAKE) -C "$$d" test; \
+		done; \
+		if [ $$found -eq 0 ]; then \
+			echo "$(RED)Error: Project '$(PROJECT)' not found.$(RESET)"; \
+			exit 1; \
+		fi; \
 	fi
