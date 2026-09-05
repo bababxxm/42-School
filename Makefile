@@ -27,7 +27,8 @@ BOLD   := \033[1m
 .PHONY: all help push pull status remotes backup subpush subpull \
         push-libft push-printf push-gnl push-minitalk push-pipex \
         push-pushswap push-solong push-minishell push-philo push-minirt \
-        push-webserv clean-all fclean-all norm test test-libft
+        push-webserv clean-all fclean-all norm test test-libft \
+        setup-hooks submit
 
 all: help
 
@@ -40,6 +41,12 @@ help:
 	@echo "  $(GREEN)make status$(RESET) (or $(GREEN)make st$(RESET))    Show repository working status"
 	@echo "  $(GREEN)make remotes$(RESET)                List all configured remotes with URLs"
 	@echo "  $(GREEN)make backup$(RESET)                 Create a timestamped backup of the .git directory"
+	@echo ""
+	@echo "$(BOLD)Quality & 42 Intra Submission Tooling:$(RESET)"
+	@echo "  $(GREEN)make setup-hooks$(RESET)            Install Git pre-commit hooks (Norminette & artifact guards)"
+	@echo "  $(GREEN)make submit PROJECT=<name> [REMOTE=<remote_or_url>] [BRANCH=master]$(RESET)"
+	@echo "      Automated Norm check, test execution, fclean, and subtree push to 42 Intra"
+	@echo "      $(YELLOW)Example:$(RESET) make submit PROJECT=push_swap REMOTE=git@vogsphere.42bangkok.com:..."
 	@echo ""
 	@echo "$(BOLD)Subtree Operations (Push/Pull Single Project):$(RESET)"
 	@echo "  $(GREEN)make subpush DIR=<path> REMOTE=<remote> [BRANCH=master]$(RESET)"
@@ -208,3 +215,90 @@ test:
 			exit 1; \
 		fi; \
 	fi
+
+# --- Quality & 42 Intra Submission Automation ---
+
+setup-hooks:
+	@echo "$(CYAN)Configuring Git pre-commit hook...$(RESET)"
+	@git config core.hooksPath .githooks
+	@chmod +x .githooks/pre-commit
+	@echo "$(GREEN)$(BOLD)✓ Git pre-commit hook installed successfully!$(RESET)"
+	@echo "$(YELLOW)Pre-commit will now auto-verify Norminette on staged files and block forbidden *.o/binary artifacts.$(RESET)"
+
+submit:
+	@if [ -z "$(PROJECT)" ]; then \
+		echo "$(RED)$(BOLD)Error: PROJECT is required.$(RESET)"; \
+		echo "Usage: make submit PROJECT=<project-name> REMOTE=<remote-name-or-url> [BRANCH=master]"; \
+		echo "  $(YELLOW)Example:$(RESET) make submit PROJECT=libft REMOTE=git@vogsphere.42bangkok.com:vogsphere/intra-..."; \
+		exit 1; \
+	fi
+	@PROJECT_DIR=$$(find r* -maxdepth 2 -name "$(PROJECT)" -type d | head -n 1); \
+	if [ -z "$$PROJECT_DIR" ] || [ ! -d "$$PROJECT_DIR" ]; then \
+		echo "$(RED)Error: Could not locate directory for project '$(PROJECT)'.$(RESET)"; \
+		exit 1; \
+	fi; \
+	REMOTE_TARGET="$(REMOTE)"; \
+	if [ -z "$$REMOTE_TARGET" ] || [ "$$REMOTE_TARGET" = "origin" ]; then \
+		if git remote | grep -q "^vogsphere-$(PROJECT)$$"; then \
+			REMOTE_TARGET="vogsphere-$(PROJECT)"; \
+		elif git remote | grep -q "^vogsphere$$"; then \
+			REMOTE_TARGET="vogsphere"; \
+		else \
+			echo "$(RED)$(BOLD)Error: 42 submission remote not specified.$(RESET)"; \
+			echo "Please provide REMOTE=<url-or-name>."; \
+			echo "  $(YELLOW)Example:$(RESET) make submit PROJECT=$(PROJECT) REMOTE=git@vogsphere.42bangkok.com:vogsphere/intra-..."; \
+			exit 1; \
+		fi; \
+	fi; \
+	if echo "$$REMOTE_TARGET" | grep -E '^git@|^https?://'; then \
+		REMOTE_NAME="vogsphere-$(PROJECT)"; \
+		if git remote | grep -q "^$$REMOTE_NAME$$"; then \
+			git remote set-url "$$REMOTE_NAME" "$$REMOTE_TARGET"; \
+		else \
+			git remote add "$$REMOTE_NAME" "$$REMOTE_TARGET"; \
+		fi; \
+		REMOTE_TARGET="$$REMOTE_NAME"; \
+		echo "$(CYAN)Configured remote '$$REMOTE_NAME'.$(RESET)"; \
+	fi; \
+	echo ""; \
+	echo "$(BOLD)$(CYAN)=========================================$(RESET)"; \
+	echo "$(BOLD)$(CYAN)     42 INTRA SUBMISSION PIPELINE        $(RESET)"; \
+	echo "$(BOLD)$(CYAN)=========================================$(RESET)"; \
+	echo "$(CYAN)Target Project :$(RESET) $(BOLD)$$PROJECT_DIR$(RESET)"; \
+	echo "$(CYAN)Intra Remote   :$(RESET) $(BOLD)$$REMOTE_TARGET ($(BRANCH))$(RESET)"; \
+	echo ""; \
+	echo "$(BOLD)[Step 1/4] Running 42 Norminette Quality Gate...$(RESET)"; \
+	if command -v norminette >/dev/null 2>&1; then \
+		NORM_FILES=$$(find "$$PROJECT_DIR" -type f \( -name "*.c" -o -name "*.h" \) | grep -v -E '(^|/)tests?/' || true); \
+		if [ -n "$$NORM_FILES" ]; then \
+			norminette $$NORM_FILES || { echo "$(RED)$(BOLD)❌ Submission Aborted: Norminette errors found in $$PROJECT_DIR!$(RESET)"; exit 1; }; \
+			echo "$(GREEN)✓ Norminette passed with 0 errors.$(RESET)"; \
+		else \
+			echo "$(YELLOW)No C/H files found to check.$(RESET)"; \
+		fi; \
+	else \
+		echo "$(YELLOW)Warning: Norminette not installed. Skipping local norm check.$(RESET)"; \
+	fi; \
+	echo ""; \
+	echo "$(BOLD)[Step 2/4] Running Automated Project Tests...$(RESET)"; \
+	if [ -f "$$PROJECT_DIR/Makefile" ] && grep -q "^test:" "$$PROJECT_DIR/Makefile" 2>/dev/null; then \
+		$(MAKE) -C "$$PROJECT_DIR" test || { echo "$(RED)$(BOLD)❌ Submission Aborted: Tests failed in $$PROJECT_DIR!$(RESET)"; exit 1; }; \
+		echo "$(GREEN)✓ All tests passed successfully.$(RESET)"; \
+	else \
+		echo "$(YELLOW)No test suite found in $$PROJECT_DIR. Continuing.$(RESET)"; \
+	fi; \
+	echo ""; \
+	echo "$(BOLD)[Step 3/4] Cleaning Build Objects (fclean)...$(RESET)"; \
+	if [ -f "$$PROJECT_DIR/Makefile" ]; then \
+		if grep -q "^fclean:" "$$PROJECT_DIR/Makefile" 2>/dev/null; then \
+			$(MAKE) -C "$$PROJECT_DIR" fclean --no-print-directory || true; \
+		elif grep -q "^clean:" "$$PROJECT_DIR/Makefile" 2>/dev/null; then \
+			$(MAKE) -C "$$PROJECT_DIR" clean --no-print-directory || true; \
+		fi; \
+		echo "$(GREEN)✓ Cleaned build objects.$(RESET)"; \
+	fi; \
+	echo ""; \
+	echo "$(BOLD)[Step 4/4] Pushing Clean Subtree to 42 Intra...$(RESET)"; \
+	echo "$(YELLOW)Executing: git subtree push --prefix=$$PROJECT_DIR $$REMOTE_TARGET $(BRANCH)$(RESET)"; \
+	git subtree push --prefix="$$PROJECT_DIR" "$$REMOTE_TARGET" "$(BRANCH)" && \
+	echo "$(GREEN)$(BOLD)🎉 Successfully submitted $(PROJECT) to 42 Intra ($$REMOTE_TARGET/$(BRANCH))!$(RESET)"
